@@ -4,8 +4,16 @@
   "description": "Library for sagas",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "test:live": "nodemon --exec 'jasmine-ts'",
+    "build": "tsc -p .",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "start": "ts-node src/index.ts"
   },
   "author": "Herr Doktor",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  }
 }

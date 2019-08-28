@@ -1,0 +1,11 @@
+{
+  "name": "sagas",
+  "version": "1.0.0",
+  "description": "Library for sagas",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Herr Doktor",
+  "license": "ISC"
+}

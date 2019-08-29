@@ -1,11 +1,11 @@
 import { Saga } from "../Saga";
-import { Action } from "../Action";
+import { Step } from "../Step";
 
 export abstract class AbstractSaga<T> implements Saga<T> {
 
     constructor(private state: T) {}
 
-    abstract getActions(): Action<T>[];
+    abstract getSteps(): Step<T>[];
     
     getState(): T {
         return this.state;

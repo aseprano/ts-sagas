@@ -1,6 +1,6 @@
-import { Action } from "../Action";
+import { Step } from "../Step";
 
-export abstract class AbstractAction<T> implements Action<T> {
+export abstract class AbstractStep<T> implements Step<T> {
 
     abstract run(state: T): Promise<void>;
 

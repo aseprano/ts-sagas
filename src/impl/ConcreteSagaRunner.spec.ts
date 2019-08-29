@@ -1,14 +1,14 @@
 import { mock, when, instance, verify } from 'ts-mockito';
 import { AbstractSaga } from './AbstractSaga';
-import { AbstractAction } from './AbstractAction';
+import { AbstractStep } from './AbstractStep';
 import { ConcreteSagaRunner } from './ConcreteSagaRunner';
-import { Action } from '../Action';
+import { Step } from '../Step';
 
 describe('ConcreteSagaRunner', () => {
     const sagaRunner = new ConcreteSagaRunner();
     
-    function createSuccessAction<T>(run: () => void = () => {}, compensate: () => void = () => {}): Action<T> {
-        const action = mock(AbstractAction);
+    function createSuccessStep<T>(run: () => void = () => {}, compensate: () => void = () => {}): Step<T> {
+        const action = mock(AbstractStep);
 
         when(action.run).thenReturn(() => {
             run();
@@ -23,8 +23,8 @@ describe('ConcreteSagaRunner', () => {
         return action;
     }
 
-    function createErrorAction<T>(compensate: () => void = () => {}): Action<T> {
-        const action = mock(AbstractAction);
+    function createErrorStep<T>(compensate: () => void = () => {}): Step<T> {
+        const action = mock(AbstractStep);
         when(action.run).thenReturn(() => Promise.reject());
         when(action.compensate).thenReturn(() => {
             compensate();
@@ -34,27 +34,27 @@ describe('ConcreteSagaRunner', () => {
         return action;
     }
 
-    it('runs with success a saga that has no actions', async () => {
+    it('runs with success a saga that has no steps', async () => {
         const fakeSaga = mock(AbstractSaga);
-        when(fakeSaga.getActions).thenReturn(() => []);
+        when(fakeSaga.getSteps).thenReturn(() => []);
         when(fakeSaga.getState()).thenReturn({});
 
         await sagaRunner.run(instance(fakeSaga));
     });
 
-    it('runs all the actions are run in sequence if no error happens', async () => {
+    it('runs all the steps are run in sequence if no error happens', async () => {
         const callsOrder: number[] = [];
 
-        const action1 = createSuccessAction(() => {
+        const action1 = createSuccessStep(() => {
             callsOrder.push(1);
         });
 
-        const action2 = createSuccessAction(() => {
+        const action2 = createSuccessStep(() => {
             callsOrder.push(2);
         });
 
         const fakeSaga = mock(AbstractSaga);
-        when(fakeSaga.getActions).thenReturn(() => [
+        when(fakeSaga.getSteps).thenReturn(() => [
             instance(action1),
             instance(action2),
         ]);
@@ -63,21 +63,21 @@ describe('ConcreteSagaRunner', () => {
         expect(callsOrder).toEqual([1, 2]);
     });
 
-    it('does not run actions following an error', async () => {
+    it('does not run steps following an error', async () => {
         const callsOrder: number[] = [];
 
-        const action1 = createSuccessAction(() => {
+        const action1 = createSuccessStep(() => {
             callsOrder.push(1);
         });
 
-        const action2 = createSuccessAction(() => {
+        const action2 = createSuccessStep(() => {
             callsOrder.push(2);
         });
 
-        const errorAction = createErrorAction();
+        const errorAction = createErrorStep();
 
         const fakeSaga = mock(AbstractSaga);
-        when(fakeSaga.getActions).thenReturn(() => [
+        when(fakeSaga.getSteps).thenReturn(() => [
             instance(action1),
             instance(action2),
             instance(errorAction),
@@ -88,27 +88,27 @@ describe('ConcreteSagaRunner', () => {
         expect(callsOrder).toEqual([1, 2]);
     });
 
-    it('compensates all the actions in the reverse order on error', async () => {
+    it('compensates all the steps in the reverse order on error', async () => {
         const compensations: number[] = [];
 
-        const action1 = createSuccessAction(
+        const action1 = createSuccessStep(
             () => {},
             () => {
                 compensations.push(1);
             }
         );
 
-        const action2 = createSuccessAction(
+        const action2 = createSuccessStep(
             () => {},
             () => {
                 compensations.push(2)
             }
         );
 
-        const error = createErrorAction();
+        const error = createErrorStep();
 
         const fakeSaga = mock(AbstractSaga);
-        when(fakeSaga.getActions).thenReturn(() => [
+        when(fakeSaga.getSteps).thenReturn(() => [
             instance(action1),
             instance(action2),
             instance(error),

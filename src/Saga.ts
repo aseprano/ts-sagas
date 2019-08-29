@@ -1,8 +1,8 @@
-import { Action } from "./Action";
+import { Step } from "./Step";
 
 export interface Saga<State> {
 
-    getActions(): Action<State>[];
+    getSteps(): Step<State>[];
 
     getState(): State;
 

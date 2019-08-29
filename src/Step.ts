@@ -1,4 +1,4 @@
-export interface Action<State> {
+export interface Step<State> {
 
     run(state: State): Promise<void>;
 

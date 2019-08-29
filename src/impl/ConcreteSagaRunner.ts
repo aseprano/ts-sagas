@@ -1,10 +1,10 @@
 import { SagaRunner } from "../SagaRunner";
 import { Saga } from "../Saga";
-import { Action } from "../Action";
+import { Step } from "../Step";
 
 export class ConcreteSagaRunner implements SagaRunner {
 
-    private async runActions(actions: Action<any>[], state: any): Promise<void> {
+    private async runSteps(actions: Step<any>[], state: any): Promise<void> {
         if (!actions.length) {
             return Promise.resolve();
         }
@@ -13,7 +13,7 @@ export class ConcreteSagaRunner implements SagaRunner {
         await currentAction.run(state);
 
         try {
-            return await this.runActions(actions, state);
+            return await this.runSteps(actions, state);
         } catch (error) {
             await currentAction.compensate(state);
             throw error;
@@ -21,7 +21,7 @@ export class ConcreteSagaRunner implements SagaRunner {
     }
 
     async run(saga: Saga<any>): Promise<void> {
-        return this.runActions(saga.getActions(), saga.getState())
+        return this.runSteps(saga.getSteps(), saga.getState())
             .catch(() => {});
     }
 

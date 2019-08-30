@@ -25,11 +25,15 @@ describe('ConcreteSagaRunner', () => {
 
     function createErrorStep<T>(compensate: () => void = () => {}): Step<T> {
         const action = mock(AbstractStep);
-        when(action.run).thenReturn(() => Promise.reject());
-        when(action.compensate).thenReturn(() => {
-            compensate();
-            return Promise.resolve();
-        });
+
+        when(action.run)
+            .thenReturn(() => Promise.reject("A generic error"));
+
+        when(action.compensate)
+            .thenReturn(() => {
+                compensate();
+                return Promise.resolve();
+            });
 
         return action;
     }
@@ -63,7 +67,7 @@ describe('ConcreteSagaRunner', () => {
         expect(callsOrder).toEqual([1, 2]);
     });
 
-    it('does not run steps following an error', async () => {
+    it('does not run steps following an error', (done) => {
         const callsOrder: number[] = [];
 
         const action1 = createSuccessStep(() => {
@@ -83,12 +87,15 @@ describe('ConcreteSagaRunner', () => {
             instance(errorAction),
         ]);
 
-        await sagaRunner.run(instance(fakeSaga));
-        verify(errorAction.run).once();
-        expect(callsOrder).toEqual([1, 2]);
+        sagaRunner.run(instance(fakeSaga))
+            .catch(() => {
+                verify(errorAction.run).once();
+                expect(callsOrder).toEqual([1, 2]);
+                done();
+            });
     });
 
-    it('compensates all the steps in the reverse order on error', async () => {
+    it('compensates all the steps in the reverse order on error', (done) => {
         const compensations: number[] = [];
 
         const action1 = createSuccessStep(
@@ -108,15 +115,19 @@ describe('ConcreteSagaRunner', () => {
         const error = createErrorStep();
 
         const fakeSaga = mock(AbstractSaga);
+        
         when(fakeSaga.getSteps).thenReturn(() => [
             instance(action1),
             instance(action2),
             instance(error),
         ]);
 
-        await sagaRunner.run(instance(fakeSaga));
-        expect(compensations).toEqual([2, 1]);
-        verify(error.compensate).never();
+        sagaRunner.run(instance(fakeSaga))
+            .catch(() => {
+                expect(compensations).toEqual([2, 1]);
+                verify(error.compensate).never();
+                done();
+            });
     });
 
 });

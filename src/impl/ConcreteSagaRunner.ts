@@ -16,13 +16,12 @@ export class ConcreteSagaRunner implements SagaRunner {
             return await this.runSteps(actions, state);
         } catch (error) {
             await currentAction.compensate(state);
-            throw error;
+            return Promise.reject(error);
         }
     }
 
     async run(saga: Saga<any>): Promise<void> {
-        return this.runSteps(saga.getSteps(), saga.getState())
-            .catch(() => {});
+        return this.runSteps(saga.getSteps(), saga.getState());
     }
 
 }

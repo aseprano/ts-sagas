@@ -1,7 +1,9 @@
 {
   "name": "sagas",
   "version": "1.0.0",
+  "author": "Herr Doktor",
   "description": "Library for sagas",
+  "license": "ISC",
   "main": "index.js",
   "scripts": {
     "test": "jasmine-ts",
@@ -10,8 +12,6 @@
     "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "start": "ts-node src/index.ts"
   },
-  "author": "Herr Doktor",
-  "license": "ISC",
   "devDependencies": {
     "@types/jasmine": "^3.4.0",
     "jasmine": "^3.4.0",

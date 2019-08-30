@@ -35,4 +35,17 @@ describe('ConcreteStep', () => {
         expect(argumentPassed).toEqual(10);
     });
 
+    it('can change the compensation action', async () => {
+        let compensationRun = false;
+
+        const step = new ConcreteStep<number>(() => Promise.resolve());
+        step.setCompensation(() => {
+            compensationRun = true;
+            return Promise.resolve();
+        });
+
+        await step.compensate(1);
+        expect(compensationRun).toEqual(true);
+    });
+
 })

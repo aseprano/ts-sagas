@@ -17,10 +17,10 @@ export abstract class AbstractSaga<T> implements Saga<T> {
         return this.steps;
     }
     
-    abstract buildSaga(builder: SagaBuilder<T>): void;
-
     getState(): T {
         return this.state;
     }
+    
+    abstract buildSaga(builder: SagaBuilder<T>): void;
 
 }

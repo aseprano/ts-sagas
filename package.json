@@ -1,11 +1,11 @@
 {
-  "name": "@darkbyte/sagas",
-  "description": "Library for sagas",
-  "version": "1.0.0",
+  "name": "@darkbyte/ts-sagas",
+  "description": "Typescript library for sagas",
+  "version": "0.0.1",
   "author": "Herr Doktor",
   "homepage": "https://bitbucket.org/antonioseprano/sagas#readme",
   "license": "ISC",
-  "main": "index.js",
+  "keywords": ["saga", "distributed", "transaction", "compensate", "compensation"],
   "scripts": {
     "test": "jasmine-ts",
     "test:live": "nodemon --exec 'jasmine-ts'",

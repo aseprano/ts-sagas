@@ -1,4 +1,4 @@
-import { SagaBuilder } from './SagaBuilder';
+import { SagaBuilder } from '../src/impl/SagaBuilder';
 
 describe('SagaBuilder', () => {
 

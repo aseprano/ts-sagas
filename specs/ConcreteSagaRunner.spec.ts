@@ -1,8 +1,8 @@
 import { mock, when, instance, verify } from 'ts-mockito';
-import { AbstractSaga } from './AbstractSaga';
-import { AbstractStep } from './AbstractStep';
-import { ConcreteSagaRunner } from './ConcreteSagaRunner';
-import { Step } from '../Step';
+import { AbstractSaga } from '../src/impl/AbstractSaga';
+import { AbstractStep } from '../src/impl/AbstractStep';
+import { ConcreteSagaRunner } from '../src/impl/ConcreteSagaRunner';
+import { Step } from '../src/Step';
 
 describe('ConcreteSagaRunner', () => {
     const sagaRunner = new ConcreteSagaRunner();

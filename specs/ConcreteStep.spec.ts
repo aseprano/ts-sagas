@@ -1,4 +1,4 @@
-import { ConcreteStep } from "./ConcreteStep";
+import { ConcreteStep } from "../src/impl/ConcreteStep";
 
 describe('ConcreteStep', () => {
 

@@ -1,7 +1,7 @@
 {
   "name": "@darkbyte/ts-sagas",
   "description": "Typescript library for sagas",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "author": "Herr Doktor",
   "homepage": "https://bitbucket.org/antonioseprano/sagas#readme",
   "license": "ISC",
@@ -21,6 +21,8 @@
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
   },
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "dependencies": {},
   "repository": {
     "type": "git",

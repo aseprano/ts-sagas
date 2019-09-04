@@ -6,6 +6,7 @@
   "homepage": "https://bitbucket.org/antonioseprano/sagas#readme",
   "license": "ISC",
   "keywords": ["saga", "distributed", "transaction", "compensate", "compensation"],
+  "readme": "./README.md",
   "scripts": {
     "test": "jasmine-ts",
     "test:live": "nodemon --exec 'jasmine-ts'",

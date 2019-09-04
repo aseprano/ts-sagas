@@ -1,9 +1,9 @@
 {
   "name": "@darkbyte/ts-sagas",
   "description": "Typescript library for sagas",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "author": "Herr Doktor",
-  "homepage": "https://github.org/aseprano/ts-sagas",
+  "homepage": "https://github.com/aseprano/ts-sagas",
   "license": "ISC",
   "keywords": ["saga", "distributed", "transaction", "compensate", "compensation"],
   "readme": "./README.md",

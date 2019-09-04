@@ -1,1 +1,1 @@
-![version](https://img.shields.io/github/package-json/v/aseprano/ts-sagas)
+![version](https://img.shields.io/github/package-json/v/aseprano/ts-sagas) ![build_status](https://img.shields.io/circleci/build/github/aseprano/ts-sagas)

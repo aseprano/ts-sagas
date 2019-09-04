@@ -1,1 +1,1 @@
-![version](https://img.shields.io/npm/v/@darkbyte/ts-sagas)
+![version](https://img.shields.io/npm/v/@darkbyte/ts-sagas) ![build](https://img.shields.io/bitbucket/pipelines/antonioseprano/sagas)

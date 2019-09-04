@@ -14,7 +14,7 @@
   ],
   "readme": "./README.md",
   "scripts": {
-    "test": "nyc jasmine-ts",
+    "test": "npm run build && nyc jasmine-ts",
     "test:live": "nodemon --exec 'jasmine-ts'",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "tsc -p .",

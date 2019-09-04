@@ -5,11 +5,18 @@
   "author": "Herr Doktor",
   "homepage": "https://github.com/aseprano/ts-sagas",
   "license": "ISC",
-  "keywords": ["saga", "distributed", "transaction", "compensate", "compensation"],
+  "keywords": [
+    "saga",
+    "distributed",
+    "transaction",
+    "compensate",
+    "compensation"
+  ],
   "readme": "./README.md",
   "scripts": {
     "test": "jasmine-ts",
     "test:live": "nodemon --exec 'jasmine-ts'",
+    "coverage": "nyc npm run test",
     "build": "tsc -p .",
     "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "start": "ts-node src/index.ts"
@@ -18,6 +25,7 @@
     "@types/jasmine": "^3.4.0",
     "jasmine": "^3.4.0",
     "jasmine-ts": "^0.3.0",
+    "nyc": "^14.1.1",
     "ts-mockito": "^2.4.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"

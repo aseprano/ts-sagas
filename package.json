@@ -1,9 +1,9 @@
 {
   "name": "@darkbyte/ts-sagas",
   "description": "Typescript library for sagas",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Herr Doktor",
-  "homepage": "https://bitbucket.org/antonioseprano/sagas#readme",
+  "homepage": "https://github.org/aseprano/ts-sagas",
   "license": "ISC",
   "keywords": ["saga", "distributed", "transaction", "compensate", "compensation"],
   "readme": "./README.md",
@@ -27,6 +27,6 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/antonioseprano/sagas.git"
+    "url": "git@github.com:aseprano/ts-sagas.git"
   }
 }

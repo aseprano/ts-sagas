@@ -1,11 +1,6 @@
 {
-    "all": true,
-    "include": [
-        "dist/src/impl/**/*.js"
-    ],
+    "extension": ".ts",
     "exclude": [
-        "dist/**/*.spec.js",
-        "**/*-exports.js",
-        "**/index.js"
+        "specs/"
     ]
 }

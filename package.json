@@ -1,7 +1,7 @@
 {
   "name": "@darkbyte/ts-sagas",
   "description": "Typescript library for sagas",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "author": "Herr Doktor",
   "homepage": "https://github.com/aseprano/ts-sagas",
   "license": "ISC",

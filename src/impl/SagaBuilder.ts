@@ -6,13 +6,16 @@ export class SagaBuilder<T> {
     private steps: Step<T>[] = [];
     private lastStep?: ConcreteStep<T> = undefined;
     
+    constructor(private stepFactory: (action: Action<T>) => ConcreteStep<T>) {}
+
     private addStep(newStep: ConcreteStep<T>) {
         this.steps.push(newStep);
         this.lastStep = newStep;
     }
 
     step(action: Action<T>): SagaBuilder<T> {
-        this.addStep(new ConcreteStep(action));
+        const newStep = this.stepFactory(action);
+        this.addStep(newStep);
         return this;
     }
 

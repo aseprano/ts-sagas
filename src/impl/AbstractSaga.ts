@@ -1,6 +1,7 @@
 import { Saga } from "../Saga";
 import { Step } from "../Step";
 import { SagaBuilder } from "./SagaBuilder";
+import { ConcreteStep } from "./ConcreteStep";
 
 export abstract class AbstractSaga<T> implements Saga<T> {
     private steps?: Step<T>[] = undefined;
@@ -9,7 +10,7 @@ export abstract class AbstractSaga<T> implements Saga<T> {
 
     getSteps(): Step<T>[] {
         if (this.steps === undefined) {
-            const builder = new SagaBuilder<T>();
+            const builder = new SagaBuilder<T>((action) => new ConcreteStep(action));
             this.buildSaga(builder);
             this.steps = builder.getSteps();
         }
